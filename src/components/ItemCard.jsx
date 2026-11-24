@@ -1,25 +1,32 @@
-const ItemCard = () => {
+import { api } from "../api/api"
+import { Link } from 'react-router-dom'
+import { useItemStore } from "../store/useItemStore"
+import { useUserStore } from "../store/useUserStore"
+
+const ItemCard = ({ id, title, description, price, highestBid, bidCount, username, imageUrl, status }) => {
     return (
-        <div className="item-card">
-            <img src={imageUrl} class="item-image" />
-            <div class="item-content">
-                <span class="status-badge status-active">Активное</span>
-                <h3 class="item-title">Название</h3>
-                <p class="item-description">Описание</p>
-                <div class="item-footer">
-                    <div>
-                        <div class="item-price">5000 Р</div>
-                        <div class="bid-info">
-                            5000 P
-                            <span class="bid-count">2</span>
+        <Link to={`/item/${id}`}>
+            <div className="item-card">
+                <img src={imageUrl} class="item-image" />
+                <div class="item-content">
+                    <span class="status-badge status-active">{status}</span>
+                    <h3 class="item-title">{title}</h3>
+                    <p class="item-description">{description}</p>
+                    <div class="item-footer">
+                        <div>
+                            <div class="item-price">{price}</div>
+                            <div class="bid-info">
+                                {highestBid}
+                                <span class="bid-count">{bidCount}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="item-meta">
-                        <span class="item-seller">Продавец: Пользователь</span>
+                        <div class="item-meta">
+                            <span class="item-seller">Продавец: {username}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
